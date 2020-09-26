@@ -1,0 +1,18 @@
+.main {
+  min-height: 100vh;
+  padding: 0 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #6CA1D2;
+}
+
+.shape {
+  z-index: 0;
+  position: absolute;
+  color: white;
+  font-size: 50px;
+  font-weight: 700;
+  opacity: 0.75;
+}
