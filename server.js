@@ -1,20 +1,47 @@
 import express from "express";
 import next from "next";
+import http from "http";
+import { ExpressPeerServer } from "peer";
 
 const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
+const expressServer = express();
+const server = http.createServer(expressServer);
+const peerServer = ExpressPeerServer(server, {
+  allow_discovery: true,
+  debug: true,
+});
+
+const connected = [];
 
 app.prepare().then(() => {
-  const server = express();
+  expressServer.use("/connect", peerServer);
 
-  server.get("/a", (req, res) => {
-    return app.render(req, res, "/a", req.query);
+  peerServer.on("connection", (id) => {
+    if (!connected.includes(id)) {
+      connected.push({ id });
+    }
   });
 
-  server.get("/b", (req, res) => {
-    return app.render(req, res, "/b", req.query);
+  peerServer.on("disconnect", (id) => {
+    const clientIndex = connected.indexOf(id);
+    if (clientIndex !== -1) {
+      connected.splice(clientIndex, 1);
+    }
+  });
+
+  peerServer.on("error", (error) => {
+    console.log("PEERJS ERROR", { error });
+  });
+
+  expressServer.get("/connect/:channel", (req, res) => {
+    const { channel } = req.params;
+    const clientsInChannel = connected.filter((client) =>
+      client.id.startsWith(channel)
+    );
+    return res.json(clientsInChannel);
   });
 
   server.all("*", (req, res) => {
