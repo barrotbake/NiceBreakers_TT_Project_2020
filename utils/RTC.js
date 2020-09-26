@@ -1,49 +1,79 @@
-import "isomorphic-fetch";
-import EventEmitter from "eventemitter3";
 import Peer from "peerjs";
 
-const events = new EventEmitter();
-
-const generateConnectionId = (channelId) => {
-  const numbers = new Uint32Array(1);
-  (window.crypto || window.msCrypto).getRandomValues(numbers);
-  return `${channelId}-${numbers[0]}`;
+const signalConfig = {
+  host: process.env.NODE_ENV === "production" ? "<OUR_DOMAIN>" : "localhost",
+  port: process.env.NODE_ENV === "production" ? 443 : 3000,
+  path: "/connect",
+  debug: 2,
 };
 
 export default class RTC {
-  constructor() {
+  constructor(room, connections = {}) {
     this.peer = null;
-    this.connections = [];
+    this.conn = null;
+    this.lastPeerId = "";
+    this.room = room;
+    this.connections = connections;
   }
 
-  async initializeChannel(channelId) {
-    this.peer = new Peer(generateConnectionId(channelId), signal);
-    this.peer.on("error", this.onError);
-    this.peer.on("close", this.onClose);
-    this.peer.on("disconnected", this.onDisconnected);
-    this.peer.on("connection".this.onConnection);
-  }
-
-  async establishConnection(channelId) {
-    let connectionId = 0;
-    while (true) {
-      const idCandidate = `${channelId}-${connectionId}`;
-      const peer = new Peer(idCandidate, signal);
-      const isConnected = await new Promise((resolve, reject) => {
-        peer.on("error", (error) => {
-          if (error.type === "unavailable-id") {
-            peer.destroy();
-            connectionId++;
-            resolve(false);
-          }
-        });
-        peer.on("open", () => {
-          resolve(true);
-        });
-      });
-      if (isConnected) {
-        return peer;
+  initialize() {
+    this.peer = new Peer(null, signalConfig);
+    this.peer.on("open", (id) => {
+      if (peer.id === null) {
+        peer.id = lastPeerId;
+      } else {
+        lastPeerId = peer.id;
       }
+      console.log("OPEN", peer.id, { id });
+    });
+    this.peer.on("connection", (connection) => {
+      connection.on("open", () => {
+        connection.send("Cannot Connect");
+        setTimeout(() => c.close(), 500);
+        console.log("cannot connect");
+      });
+    });
+    this.peer.on("disconnected", () => {
+      console.log("connection lost");
+      peer.id = lastPeerId;
+      peer._lastServerId = lastPeerId;
+      peer.reconnect();
+    });
+    this.peer.on("close", () => {
+      conn = null;
+      console.log("connection destroyed");
+    });
+    this.peer.on("error", (error) => {
+      console.log({ error });
+    });
+  }
+
+  send(message) {
+    if (this.conn !== null && this.conn.open) {
+      return this.conn.send(message);
     }
+    console.log("tried to signal, but connection is closed");
+  }
+
+  join(id) {
+    if (this.conn !== null) {
+      this.conn.close();
+      this.conn = null;
+    }
+    this.conn = this.peer.connect(id, { reliable: true });
+    this.conn.on("open", () => {
+      console.log("Connected to: ", conn.peer);
+      conn.send("HelloWorld");
+    });
+    conn.on("data", (data) => {
+      console.log("DATA", { data });
+    });
+    conn.on("close", () => {
+      console.log("connection closed");
+      conn = null;
+    });
+    conn.on("error", (error) => {
+      console.log("join error", { error });
+    });
   }
 }
