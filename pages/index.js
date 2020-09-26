@@ -8,8 +8,8 @@ import Button from '../components/button/Button'
 export default function Home() {
   return (
     <div>
-      <Navbar> </Navbar>
-      <User_Join_Form></User_Join_Form>
+
+      <Navbar />
       <div className={styles.container}>
         <Head>
           <title>NiceBreakers</title>
@@ -17,20 +17,19 @@ export default function Home() {
         </Head>
         
 
-        
-{/* 
         <main className={styles.main}>
-
           <div className={styles.grid}>
+
 
             <Button text="Create"/>
 
             <Button text="Join" />
 
+
           </div>
-        </main> */}
+        </main>
 
       </div>
     </div>
-  )
+  );
 }
