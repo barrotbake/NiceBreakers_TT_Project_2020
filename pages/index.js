@@ -1,11 +1,8 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-<<<<<<< HEAD
 import User_Join_Form from '../components/user-join-form.js'
-=======
 import Navbar from '../components/Navbar'
 import Button from '../components/Button'
->>>>>>> 62d514f11cbf3f5a5ec868126148749aecb8806e
 
 export default function Home() {
   return (
