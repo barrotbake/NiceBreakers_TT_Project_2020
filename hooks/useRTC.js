@@ -6,6 +6,7 @@ const signal = {
   host: process.env.NODE_ENV === "production" ? "<OUR_DOMAIN>" : "localhost",
   port: process.env.NODE_ENV === "production" ? 443 : 3000,
   path: "/connect",
+  debug: 2,
 };
 
 export const useRTC = (channelId) => {
