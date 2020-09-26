@@ -9,20 +9,27 @@ import Button from '../components/button/Button'
 export default function Home() {
   return (
     <div>
+
       <Navbar />
       <div className={styles.container}>
         <Head>
           <title>NiceBreakers</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
+        
 
-        <User_Create_Form></User_Create_Form>
-        {/* <main className={styles.main}>
+        <main className={styles.main}>
           <div className={styles.grid}>
-            <Button text="Create" />
+
+
+            <Button text="Create"/>
+
             <Button text="Join" />
+
+
           </div>
-        </main> */}
+        </main>
+
       </div>
     </div>
   );

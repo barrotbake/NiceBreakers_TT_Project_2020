@@ -18,7 +18,6 @@
     font-family: SF Pro;
     font-style: normal;
     font-weight: normal;
-    font-size: 20px;
 }
 
 
@@ -28,6 +27,8 @@
     height: 335px;
     left: 0px;
     top: 0px;
+    font-size: 20px;
+
 
 
     /* Inside Auto Layout */
@@ -36,19 +37,30 @@
     align-self: center;
     flex-grow: 0;
     margin: 0px 48px;
+    color: #000000;
 }
 
-.form_group{
+.form_input{
     width: 80%;
+    height: 40px;
+    left: 0px;
+    top: 0px;
+
+    background: #FFFFFF;
+    border: 5px solid #000000;
+    box-sizing: border-box;
+    border-radius: 10px;
+    font-size: 20px;
 }
 
 .button {
     position: static;
     width: 239px;
     height: 71px;
-    left: 158px;
+    left: 128px;
     top: 383px;
-
+    bottom: 12.38%;
+    
     font-family: SF Pro;
     font-style: normal;
     font-weight: normal;
@@ -59,7 +71,7 @@
     /* Inside Auto Layout */
     flex: none;
     order: 1;
-    align-self: center;
+    align-items: center;
     flex-grow: 0;
     margin: 0px 48px;
 

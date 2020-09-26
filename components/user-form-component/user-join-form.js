@@ -13,30 +13,37 @@ function User_Join_Form() {
                 {/* <div className={styles.divider}></div> */}
                 <Card.Body>
                     <Card.Text className={styles.form_text}>
-                        <Form> 
+                        <Form>
+        
                             <Form.Group controlId="formBasicName">
                                 <Form.Label>Name</Form.Label>
-                                <Form.Control className={styles.form_group} type="name" placeholder="Enter name" />
+                                <br />
+                                <Form.Control className={styles.form_input} type="name" />
                             </Form.Group>
-                            
+                            <br />
                             <Form.Group controlId="formBasicPronouns">
                                 <Form.Label>Pronouns</Form.Label>
-                                <Form.Control className={styles.form_group} type="pronouns" placeholder="Pronouns" />
+                                <br />
+                                <Form.Control className={styles.form_input} type="pronouns" />
                             </Form.Group>
-
+                            <br />
                             <Form.Group controlId="formBasicPronounciation">
                                 <Form.Label>Pronounciation</Form.Label>
-                                <Form.Control className={styles.form_group} type="pronounciation" placeholder="Pronounciation" />
+                                <br />
+                                <Form.Control className={styles.form_input} type="pronounciation" />
                             </Form.Group>
-                            
+                            <br />
                             <Form.Group controlId="formBasicRoomCode">
                                 <Form.Label>Room Code</Form.Label>
-                                <Form.Control className={styles.form_group} type="roomcode" placeholder="Room Code" />
+                                <br />
+                                <Form.Control className={styles.form_input} type="roomcode" />
                             </Form.Group>
+                            <br />
 
-                            <Button variant="light" className={styles.button}  type="submit">
+                            <Button variant="light" className={styles.button} type="submit">
                                 Start
                             </Button>
+
                         </Form>
                     </Card.Text>
                 </Card.Body>
