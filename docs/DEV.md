@@ -3,6 +3,7 @@
 ## Package Docs
 
 - [React Halfmoon (`reacthalfmoon`)](https://reacthalfmoon.github.io/)
+- [React PouchDB](https://github.com/Terreii/use-pouchdb)
 
 ## Deployment
 
