@@ -4,10 +4,10 @@ import Peer from "peerjs";
 
 const events = new EventEmitter();
 
-const signal = {
-  host: process.env.NODE_ENV === "production" ? "<OUR_DOMAIN>" : "localhost",
-  port: process.env.NODE_ENV === "production" ? 443 : 3000,
-  path: "/connect",
+const generateConnectionId = (channelId) => {
+  const numbers = new Uint32Array(1);
+  (window.crypto || window.msCrypto).getRandomValues(numbers);
+  return `${channelId}-${numbers[0]}`;
 };
 
 export default class RTC {
@@ -17,7 +17,7 @@ export default class RTC {
   }
 
   async initializeChannel(channelId) {
-    this.peer = await this.establishConnection(channelId);
+    this.peer = new Peer(generateConnectionId(channelId), signal);
     this.peer.on("error", this.onError);
     this.peer.on("close", this.onClose);
     this.peer.on("disconnected", this.onDisconnected);

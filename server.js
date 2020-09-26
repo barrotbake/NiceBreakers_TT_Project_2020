@@ -1,6 +1,6 @@
 import express from "express";
 import next from "next";
-import http from "http";
+import { createServer } from "http";
 import { ExpressPeerServer } from "peer";
 
 const port = parseInt(process.env.PORT, 10) || 3000;
@@ -8,7 +8,7 @@ const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
 const expressServer = express();
-const server = http.createServer(expressServer);
+const server = createServer(expressServer);
 const peerServer = ExpressPeerServer(server, {
   allow_discovery: true,
   debug: true,
