@@ -28,32 +28,30 @@ const RTCDebugger = (props) => {
   */
   return (
     <div>
-    
       <label>Join ID:</label>
       <span>{rtc.lobbyId}</span>
-    
+
       <label>ID:</label>
       <input
         type="text"
-        onChange={event => {
+        onChange={(event) => {
           rtc.join(event.target.value);
           event.target.value = "";
           console.log("JOIN_ATTEMPT", { rtc });
         }}
       />
-      
+
       <label>Message:</label>
       <input
         type="text"
-        onChange={event => {
+        onChange={(event) => {
           rtc.broadcast(event.target.value);
           event.target.value = "";
           console.log("MESSAGE_ATTEMPT", { rtc });
         }}
-       />
-      
+      />
     </div>
   );
-}
+};
 
 export default RTCDebugger;
