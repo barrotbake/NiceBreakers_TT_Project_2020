@@ -14,6 +14,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: #6CA1D2;
+  width: 100%;
 }
 
 .footer {
