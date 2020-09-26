@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import User_Join_Form from '../components/user-join-form.js'
+import User_Join_Form from '../components/user-form-component/user-join-form.js'
 import Navbar from '../components/Navbar'
 import Button from '../components/Button'
 
