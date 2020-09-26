@@ -21,7 +21,7 @@ export default function Home() {
 
             <Button text="Create"/>
 
-            <Button text="Join"/>
+            <Button text="Join" exact path="/join" component={User_Join_Form} />
 
           </div>
         </main>
