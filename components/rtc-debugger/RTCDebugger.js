@@ -1,6 +1,10 @@
 import { useState } from "react";
 import RTC from "../../utils/RTC";
 
+// Reference
+// - P2P Connection Example: https://github.com/jmcker/Peer-to-Peer-Cue-System
+// - Konami Code Example: https://github.com/joelnet/konami-code-react-component/blob/main/src/App.js
+
 const RTCDebugger = (props) => {
   const rtc = new RTC();
   rtc.initialize();
