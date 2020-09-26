@@ -2,8 +2,8 @@ import styles from "./mainContainer.module.css";
 
 const BGShape = () => {
   const pos = {
-    top: Math.floor(Math.random() * window.innerHeight - 100) + "px",
-    left: Math.floor(Math.random() * window.innerWidth - 100) + "px"
+    top: Math.floor(Math.random() * window.innerHeight) + "px",
+    left: Math.floor(Math.random() * window.innerWidth) + "px"
   }
   return (
     <a className={styles.shape} style={pos}> {Math.random() > 0.5 ? "X" : "O"} </a>
