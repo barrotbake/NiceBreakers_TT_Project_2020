@@ -12,7 +12,7 @@
 ## Resources
 
 - [WebRTC Troubleshooter](https://test.webrtc.org/)
-- [WebRTC when having problems with HTTPS])https://github.com/peers/peerjs-server#using-https)
+- [WebRTC when having problems with HTTPS](https://github.com/peers/peerjs-server#using-https)
 - [Next using Express Example](https://github.com/vercel/next.js/tree/canary/examples/custom-server-express)
 
 ## Styling
