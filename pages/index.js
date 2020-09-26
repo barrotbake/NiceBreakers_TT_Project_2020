@@ -9,22 +9,27 @@ export default function Home() {
   return (
     <div>
       <Navbar> </Navbar>
+      <User_Join_Form></User_Join_Form>
       <div className={styles.container}>
         <Head>
           <title>NiceBreakers</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
+        
 
+        
+{/* 
         <main className={styles.main}>
 
           <div className={styles.grid}>
 
             <Button text="Create"/>
 
-            <Button text="Join" exact path="/join" component={User_Join_Form} />
+            <Button text="Join" />
 
           </div>
-        </main>
+        </main> */}
+
       </div>
     </div>
   )
