@@ -64,6 +64,8 @@ export default class Host extends Component {
           }}
         >
           Code: {lobby}
+          <br />
+          Players: {this.state.players ? this.state.players.length : 0}
         </h1>
         <Content
           scene={this.state.scene}

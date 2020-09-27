@@ -9,7 +9,7 @@
     "Ethan Davidson <ethan.r.davidson@gmail.com> (ethandavidson.com)"
   ],
   "scripts": {
-    "dev": "next dev",
+    "dev": "node serve.js",
     "build": "next build",
     "start": "next start",
     "sockets": "node server.js"
