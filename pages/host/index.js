@@ -1,4 +1,6 @@
 import { Component } from "react";
+import User_Create_Form from "../../components/create-game-component/create-form"
+import MainContainer from "../../components/mainContainer/MainContainer"
 import io from "socket.io-client";
 import {
   NEXT_ROUND,
@@ -39,10 +41,11 @@ export default class Host extends Component {
   }
 
   render() {
+    let lobby = (this.state.user != null) ? this.state.user.lobby : "abc123"
     return (
-      <pre>
-        <code>{JSON.stringify(this.state, null, 2)}</code>
-      </pre>
+      <MainContainer>
+        <User_Create_Form code={lobby}/>
+      </MainContainer>
     );
   }
 }

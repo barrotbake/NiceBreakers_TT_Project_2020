@@ -7,13 +7,13 @@ import Form from 'react-bootstrap/Form';
 
 
 
-function User_Create_Form() {
-    
-    // TO DO: Connect the select options to a method that creates an array 
+function User_Create_Form(props) {
+
+    // TO DO: Connect the select options to a method that creates an array
 
 
     // Attempt of a previous method for this, had problems in select tag
-    
+
     // const func = function handleChange(e) {
     //     var options = e.target.options;
     //     var value = [];
@@ -43,7 +43,7 @@ function User_Create_Form() {
                                     <br />
                                     <br />
                                     {/*  */}
-                                    
+
                                     <select htmlSize={5} className={styles.form_input} multiple>
                                         <br />
                                         <option value={"What is your favorite food?"}>What is your favorite food? </option>
@@ -62,6 +62,7 @@ function User_Create_Form() {
                                     </select>
                                 </Form.Group>
                                 <Form.Text className={styles.text}>Hold down the Ctrl (windows) or Command (Mac) button to select multiple options.</Form.Text>
+                                <Form.Text className={styles.text}> Code: {props.code}</Form.Text>
                             </Form.Group>
                             <br />
 

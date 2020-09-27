@@ -14,13 +14,18 @@
   color: white;
   font-size: 50px;
   font-weight: 700;
+  opacity: 0;
+  animation: fade 10s linear 5s infinite;
 }
 
-.fadeIn {
-  z-index: 0;
-  position: absolute;
-  color: white;
-  font-size: 50px;
-  font-weight: 700;
-  transition: all 1s linear;
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
