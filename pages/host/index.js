@@ -1,20 +1,17 @@
 import { Component } from "react";
 import User_Create_Form from "../../components/create-game-component/create-form"
+import Host_Join_Lobby from "../../components/host-join-lobby-component/host-join-lobby"
 import MainContainer from "../../components/mainContainer/MainContainer"
+import Content from "../../components/content/Content"
 import io from "socket.io-client";
-import {
-  NEXT_ROUND,
-  ANSWER_QUESTION,
-  CREATE_LOBBY,
-  JOIN_LOBBY,
-  SET_INFO,
-  HOST,
-} from "../../constants";
+import * as constants from "../../constants";
 
 export default class Host extends Component {
   constructor() {
     super();
     this.state = {
+      scene: constants.USER_CREATE_FORM,
+      socket: null,
       user: null,
       players: [],
       round: {
@@ -29,11 +26,12 @@ export default class Host extends Component {
   }
 
   componentDidMount() {
-    const socket = io.connect(HOST);
-    socket.emit(CREATE_LOBBY);
+    const socket = io.connect(constants.HOST);
+    this.setState({socket})
+    socket.emit(constants.CREATE_LOBBY);
 
-    socket.on(CREATE_LOBBY, ({ user }) => {
-      console.log(CREATE_LOBBY, { user });
+    socket.on(constants.CREATE_LOBBY, ({ user }) => {
+      console.log(constants.CREATE_LOBBY, { user });
       this.setState((state) => ({
         user,
         round: state.round,
@@ -49,7 +47,8 @@ export default class Host extends Component {
     let lobby = (this.state.user != null) ? this.state.user.lobby : "abc123"
     return (
       <MainContainer>
-        <User_Create_Form code={lobby}/>
+        <h1> Code: {lobby} </h1>
+        <Content scene={this.state.scene} socket={this.state.socket} data={this.state}/>
       </MainContainer>
     );
   }
