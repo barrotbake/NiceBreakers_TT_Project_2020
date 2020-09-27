@@ -6,14 +6,13 @@ import * as constants from "../../constants";
 
 const Host_Join_Lobby = (props) => {
 
-    // TO DO: Connect props for # of users, and the room code
     return (
         <div className={styles.gen_box}>
 
             <div className={styles.top_box}>
                 <h1 className={styles.top_text}>Player Number</h1>
                 <h2 className={styles.top_text}>{props.data.players.length}</h2>
-                {/* props.children */}
+                
             </div>
             <br />
 
@@ -30,7 +29,7 @@ const Host_Join_Lobby = (props) => {
                 <br />
                 <br />
                 <p className={styles.right_sub_text}>{props.data.user.lobby}</p>
-                {/* {props.children} */}
+              
 
                 <br />
                 <br />
