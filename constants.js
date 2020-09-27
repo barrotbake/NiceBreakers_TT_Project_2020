@@ -20,5 +20,5 @@ module.exports = {
   END_SCREEN: "end-screen",
 
   // Miscellaneous Constants
-  HOST: "localhost:4242",
+  HOST: "localhost:3000",
 };
