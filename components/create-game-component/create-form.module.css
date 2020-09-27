@@ -16,9 +16,6 @@
     border: 5px solid #000000;
     box-sizing: border-box;
     border-radius: 50px;
-
-    font-style: normal;
-    font-weight: normal; */
 }
 
 .form_text{
@@ -52,7 +49,7 @@
 }
 
 .text{
-    font-size: 15px;
+    font-size: 25px;
 }
 
 .button {

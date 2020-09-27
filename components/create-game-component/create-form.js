@@ -12,8 +12,7 @@ function User_Create_Form(props) {
         <Card.Body>
           <Card.Text>
             <Form>
-<<<<<<< HEAD
-              <Form.Label>Don't be shy, choose a game!</Form.Label>
+              <Form.Label className={styles.label}>Don't be shy, choose a game!</Form.Label>
               <div onClick={() => {
                 props.socket.emit(constants.START_GAME, {
                   game: constants.TWO_TRUTHS_AND_A_LIE,
@@ -21,20 +20,6 @@ function User_Create_Form(props) {
               }} className={styles.parent}>
                 <a className={styles.child}> {constants.TWO_TRUTHS_AND_A_LIE} </a>
               </div>
-=======
-              <Form.Label className={styles.form_text}>
-                Don't be shy, choose a game!
-              </Form.Label>
-              <Button
-                className={styles.button}
-                text={constants.TWO_TRUTHS_AND_A_LIE}
-                onClick={() => {
-                  props.socket.emit(constants.START_GAME, {
-                    game: constants.TWO_TRUTHS_AND_A_LIE,
-                  });
-                }}
-              />
->>>>>>> 2d8242279f2f4cb0e872188717a8342332164039
               {/* <Button
                             className={styles.button}
                             text={constants.TWO_TRUTHS_AND_A_LIE}
