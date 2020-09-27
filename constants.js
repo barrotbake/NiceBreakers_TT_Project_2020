@@ -10,5 +10,5 @@ module.exports = {
   },
 
   // Miscellaneous Constants
-  HOST: "localhost:3000",
+  HOST: "localhost:4242",
 };
