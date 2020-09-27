@@ -6,30 +6,13 @@ import Form from "react-bootstrap/Form";
 import * as constants from "../../constants";
 
 function User_Create_Form(props) {
-  // TO DO: Connect the select options to a method that creates an array
-
-  // Attempt of a previous method for this, had problems in select tag
-
-  // const func = function handleChange(e) {
-  //     var options = e.target.options;
-  //     var value = [];
-  //     for (var i = 0, l = options.length; i < l; i++) {
-  //         if (options[i].selected) {
-  //             value.push(options[i].value);
-  //             console.log(value);
-  //         }
-  //     }
-  //     this.props.someCallback(value);
-  // }
-
   return (
     <>
       <Card className={styles.form}>
-        {/* <Card.Img variant="top" className={styles.image} /> */}
-        {/* <div className={styles.divider}></div> */}
         <Card.Body>
-          <Card.Text className={styles.form_text}>
+          <Card.Text>
             <Form>
+<<<<<<< HEAD
               <Form.Label>Don't be shy, choose a game!</Form.Label>
               <div onClick={() => {
                 props.socket.emit(constants.START_GAME, {
@@ -38,7 +21,11 @@ function User_Create_Form(props) {
               }} className={styles.parent}>
                 <a className={styles.child}> {constants.TWO_TRUTHS_AND_A_LIE} </a>
               </div>
-              {/* <Button
+=======
+              <Form.Label className={styles.form_text}>
+                Don't be shy, choose a game!
+              </Form.Label>
+              <Button
                 className={styles.button}
                 text={constants.TWO_TRUTHS_AND_A_LIE}
                 onClick={() => {
@@ -46,7 +33,17 @@ function User_Create_Form(props) {
                     game: constants.TWO_TRUTHS_AND_A_LIE,
                   });
                 }}
-              /> */}
+              />
+>>>>>>> 2d8242279f2f4cb0e872188717a8342332164039
+              {/* <Button
+                            className={styles.button}
+                            text={constants.TWO_TRUTHS_AND_A_LIE}
+                            onClick={() => {
+                            props.socket.emit(constants.START_GAME, {
+                                game: constants.TWO_TRUTHS_AND_A_LIE,
+                            });
+                            }}
+                             /> */}
             </Form>
           </Card.Text>
         </Card.Body>

@@ -64,7 +64,6 @@ function User_Join_Form(props) {
                   for (const [fieldName, value] of Object.entries({
                     name,
                     pronoun,
-                    pronunciation,
                   })) {
                     if (value.length === 0) {
                       return await SweetAlert.fire({

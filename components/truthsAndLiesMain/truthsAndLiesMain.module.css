@@ -1,0 +1,11 @@
+.page {
+   display: flex;
+   height: 1000px;
+   width: 100%;
+   flex-direction: column;
+   background-color: #6CA1D2;
+}
+
+.row{
+    margin-top: 100px;
+}
