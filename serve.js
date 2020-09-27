@@ -23,6 +23,7 @@ const handle = app.getRequestHandler();
 
 const lobbies = {};
 const connections = {};
+const games = {};
 
 app.prepare().then(() => {
   const server = createServer((req, res) => {
@@ -91,6 +92,30 @@ app.prepare().then(() => {
       io.to(socket.id).emit(HOST_JOIN_LOBBY, { activities });
     });
 
+    socket.on("game-submitted", ({ truth1, truth2, lie, player2, player3 }) => {
+      const gameId = [socket.id, player2, player3]
+        .filter((p) => p !== undefined)
+        .sort()
+        .join("");
+      console.log({ games, gameId }, socket.id, player2, player3);
+      games[gameId].push({ truth2, truth1, lie });
+      const finished = games[gameId].length === 2;
+      if (finished) {
+        console.log(games[gameId]);
+        io.to(socket.id).emit("everyone-submitted", {
+          player2: games[gameId][0],
+        });
+        io.to(player2).emit("everyone-submitted", {
+          player2: games[gameId][1],
+        });
+        if (player3) {
+          io.to(player2).emit("everyone-submitted", {
+            player2: games[gameId][1],
+          });
+        }
+      }
+    });
+
     socket.on(START_GAME, ({ game }) => {
       if (!connections[socket.id].isHost) {
         return io
@@ -102,8 +127,38 @@ app.prepare().then(() => {
           .to(socket.id)
           .emit(START_GAME, { error: "No valid game has been chosen." });
       }
-      for (let playerId of lobbies[connections[socket.id].lobby].players) {
-        io.to(playerId).emit(START_GAME, { game });
+      let willNeedGroupOf3 =
+        lobbies[connections[socket.id].lobby].players.length % 2 > 0;
+      const groups = lobbies[connections[socket.id].lobby].players.reduce(
+        (acc, cur, i) => {
+          if (acc === null) {
+            acc = [[cur]];
+          } else if (acc[0].length < willNeedGroupOf3 ? 3 : 2) {
+            acc[0].push(cur);
+            if (acc[0].length === 3) {
+              willNeedGroupOf3 = false;
+            }
+          } else {
+            acc.unshift([cur]);
+          }
+          return acc;
+        },
+        null
+      );
+      for (const [member1, member2, member3] of groups) {
+        const gameId = [member1, member2, member3]
+          .filter((p) => p !== undefined)
+          .sort()
+          .join("");
+        games[gameId] = [];
+        io.to(member1).emit(START_GAME, { player2: member2, player3: member3 });
+        io.to(member2).emit(START_GAME, { player2: member1, player3: member3 });
+        if (member3) {
+          io.to(member3).emit(START_GAME, {
+            player2: member1,
+            player3: member2,
+          });
+        }
       }
     });
 

@@ -42,8 +42,11 @@ class Play extends Component {
       this.setState({ players, scene: constants.WAITING });
     });
 
-    socket.on(constants.START_GAME, ({ game }) => {
-      this.setState({ scene: game });
+    socket.on(constants.START_GAME, ({ player2, player3 }) => {
+      this.setState({
+        scene: constants.TWO_TRUTHS_AND_A_LIE,
+        foes: { player2, player3 },
+      });
     });
   }
 
