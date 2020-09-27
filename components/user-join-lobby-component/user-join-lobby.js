@@ -1,6 +1,5 @@
 import React from 'react'
 import styles from './user-join-lobby.module.css'
-import Button from "../button/Button";
 import Card from 'react-bootstrap/Card'
 
 
