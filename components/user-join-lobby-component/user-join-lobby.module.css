@@ -1,0 +1,22 @@
+.box_css{
+    background: #FFFFFF;
+    border: 5px solid #000000;
+    box-sizing: border-box;
+    border-radius: 50px;
+    display: flex;
+    height: 346px !important;
+    width: 1216px !important;
+}
+.header_text{
+    display: flex;
+    font-family: SF Pro Display;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 48px;
+    position: absolute;
+    text-align: center;
+    left: 346px;
+    top: 368px;
+    color: #000000;
+}
