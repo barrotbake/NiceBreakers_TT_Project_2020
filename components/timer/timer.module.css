@@ -1,0 +1,23 @@
+.timer {
+    width: 98px;
+    height: 94px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    background: #FFFFFF;
+    border: 5px solid #000000;
+    box-sizing: border-box;;
+}
+
+.time {
+align-content: center;
+font-family: SF Compact Display;
+font-style: normal;
+font-weight: bold;
+font-size: 40px;
+line-height: 48px;
+
+color: #000000;
+}
