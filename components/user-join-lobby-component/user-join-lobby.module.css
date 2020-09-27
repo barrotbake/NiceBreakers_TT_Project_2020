@@ -1,23 +1,18 @@
 .box_css{
+    display: flex;
+    flex-direction: column;
     background: #FFFFFF;
+    justify-content: center;
+    align-content: center;
     border: 5px solid #000000;
     box-sizing: border-box;
     border-radius: 50px;
-    display: flex;
-    height: 346px !important;
-    width: 1216px !important;
+    height: 346px;
+    width: 1216px;
 }
 
-.header_text{
+.textContainer{
     display: flex;
-    font-family: SF Pro Display;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 40px;
-    line-height: 48px;
-    position: absolute;
-    text-align: center;
-    left: 346px;
-    top: 368px;
-    color: #000000;
+    justify-content: center;
+    font-size: 35px;
 }
