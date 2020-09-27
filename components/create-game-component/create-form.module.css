@@ -1,6 +1,8 @@
 .form {
     display: flex;
-    flex-direction: row;
+    /* flex-direction: row; */
+    flex-direction: column;
+
     align-items: flex-start;
     padding: 22px 0px 0px 27px;
 
@@ -14,25 +16,29 @@
     border: 5px solid #000000;
     box-sizing: border-box;
     border-radius: 50px;
-
-    font-family: SF Pro;
+    /* font-family: SF Pro;
     font-style: normal;
-    font-weight: normal;
+    font-weight: normal; */
 }
 
 .form_text{
-    position: static;
+    /* position: static;
     width: 495px;
     height: 335px;
     left: 0px;
-    top: 0px;
+    top: 0px; */
     font-size: 30px;
+    display: flex;
+    margin: auto;
+    border-radius: 10px;
+    align-items:center;
+    justify-content:center;
 
     /* Inside Auto Layout */
-    flex: none;
+    /* flex: none;
     order: 0;
-    /* align-self: center; */
-    flex-grow: 0;
+    
+    /* flex-grow: 0; */ 
     /* margin: 0px 48px; */
     color: #000000;
 }
@@ -50,12 +56,12 @@
 }
 
 .button {
-    position: static;
-    width: 239px;
-    height: 71px;
-    left: 128px;
-    top: 383px;
-    bottom: 12.38%;
+    /* position: static; */
+    /* width: 269px;
+    height: 71px; */
+    /* left: 128px;
+    top: 383px; */
+    /* bottom: 12.38%; */
 
     font-style: normal;
     font-weight: normal;
@@ -64,11 +70,14 @@
     text-align: center;
 
     /* Inside Auto Layout */
-    flex: none;
+    /* flex: none;
     order: 1;
     align-items: center;
     flex-grow: 0;
-    margin: 0px 48px;
+    margin: 0px 48px; */
+
+    display: flex;
+    justify-content: center;
 
     border: 5px solid #000000;
     border-radius: 98px;

@@ -13,9 +13,9 @@ function User_Create_Form(props) {
             <Card className={styles.form}>
                 
                 <Card.Body>
-                    <Card.Text className={styles.form_text}>
+                    <Card.Text>
                         <Form>
-                            <Form.Label>Don't be shy, choose a game!</Form.Label>
+                            <Form.Label  className={styles.form_text}>Don't be shy, choose a game!</Form.Label>
                             <Button
                                 className={styles.button}
                                 text={constants.TWO_TRUTHS_AND_A_LIE}
