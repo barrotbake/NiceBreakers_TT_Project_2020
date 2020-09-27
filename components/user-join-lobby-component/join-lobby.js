@@ -5,10 +5,10 @@ import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 
 
-function Join_Lobby() {
-    return (
+// function Join_Lobby() {
+//     return (
         
-    )
-}
+//     )
+// }
 
-export default Join_Lobby;
+// export default Join_Lobby;

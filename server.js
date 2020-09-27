@@ -1,14 +1,15 @@
-import express from "express";
-import socketIO from "socket.io";
-import next from "next";
-import { createServer } from "http";
-import {
+const express = require("express");
+const socketIO = require("socket.io");
+const next = require("next");
+const { createServer } = require("http");
+const {
   NEXT_ROUND,
   ANSWER_QUESTION,
   CREATE_LOBBY,
   JOIN_LOBBY,
   SET_INFO,
-} from "./constants.mjs";
+} = require("./constants");
+
 const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev, quiet: false });

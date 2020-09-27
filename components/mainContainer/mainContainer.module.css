@@ -5,7 +5,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #6CA1D2;
+  background-color: #6ca1d2;
 }
 
 .shape {
@@ -14,5 +14,20 @@
   color: white;
   font-size: 50px;
   font-weight: 700;
-  opacity: 0.75;
+  opacity: 1;
+  /* animation: 10s linear fadeOut; */
+  transition: opacity 5s linear;
 }
+
+.hide {
+  opacity: 0;
+}
+
+/* @keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+} */
