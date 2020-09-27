@@ -1,7 +1,7 @@
-// import { useRound } from "../../hooks/useSockets";
+import { useRound } from "../../hooks/useSockets";
 
 export default function Host() {
-  // const round = useRound();
+  const round = useRound();
   return (
     <div>
       <div>HOST</div>
