@@ -1,9 +1,65 @@
 .TnFCard {
     display: flex;
-    width: 500px;
-    height: 500px;
+    flex-direction: column;
+    position: relative;
+    margin: auto;
+    width: 1000px;
+    padding: 10px;
+    height: 600px;
     background: #FFFFFF;
     border: 5px solid #000000;
     box-sizing: border-box;
     border-radius: 50px;
+}
+
+.firstTwo {
+    display: flex;
+    justify-content: center;
+    
+}
+.choices {
+    width: 40%;
+    height: 200px;
+    margin: 10px 20px;
+    border: 5px solid #000000;
+    box-sizing: border-box;
+    border-radius: 50px;
+    background-color: white;
+    font-size: 40px;
+}
+
+.correct{
+    background-color: green;
+    width: 40%;
+    height: 200px;
+    margin: 10px 20px;
+    border: 5px solid #000000;
+    box-sizing: border-box;
+    border-radius: 50px;
+    background-color: white;
+    font-size: 40px;
+}
+
+.wrong{
+    background-color: red;
+    width: 40%;
+    height: 200px;
+    margin: 10px 20px;
+    border: 5px solid #000000;
+    box-sizing: border-box;
+    border-radius: 50px;
+    background-color: white;
+    font-size: 40px;
+}
+
+.prompt {
+    display: fl;
+    padding: 40px;
+    font-size: 25px;
+    text-align: center;
+}
+
+.last {
+    display: flex;
+    justify-content: center;
 }
