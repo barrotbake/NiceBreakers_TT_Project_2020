@@ -9,7 +9,7 @@ const {
   SET_INFO,
   SUBMIT_FORM,
   USER_CREATE_FORM,
-  HOST_JOIN_LOBBY
+  HOST_JOIN_LOBBY,
 } = require("./constants");
 
 const lobbies = {};
@@ -30,7 +30,11 @@ io.on("connection", (socket) => {
     console.log("CREATING_LOBBY");
     connections[socket.id].isHost = true;
     connections[socket.id].lobby = createRandomAlphanum();
-    lobbies[connections[socket.id].lobby] = { host: socket.id, players: [] };
+    lobbies[connections[socket.id].lobby] = {
+      host: socket.id,
+      players: [],
+      activities: [],
+    };
     io.to(socket.id).emit(CREATE_LOBBY, { user: connections[socket.id] });
     console.log(CREATE_LOBBY, { user: connections[socket.id] });
   });
@@ -61,19 +65,19 @@ io.on("connection", (socket) => {
       players: lobbies[connections[socket.id].lobby].players,
     });
     io.to(lobbies[connections[socket.id].lobby].host).emit(PLAYER_JOINED, {
-      player: connections[socket.id],
+      players: lobbies[connections[socket.id].lobby].players,
     });
   });
 
-  socket.on(USER_CREATE_FORM, ({activities}) => {
-    // connections[socket.id].activies = activites; // fix
-    console.log("GOT USER CREATE FORM")
-    io.to(socket.id).emit(HOST_JOIN_LOBBY, {});
+  socket.on(USER_CREATE_FORM, ({ activities }) => {
+    // host continues after determining activities
+    lobbies[connections[socket.id].lobby].activities = activities;
+    io.to(socket.id).emit(HOST_JOIN_LOBBY, { activities });
   });
 
   socket.on("disconnect", () => {
     console.log("DC");
-    if (connections[socket.id].isHost) {
+    if (connections[socket.id] && connections[socket.id].isHost) {
       for (let playerId of lobbies[connections[socket.id].lobby].players) {
         io.to(playerId).emit("disconnect");
         delete connections[playerId];

@@ -1,8 +1,8 @@
 import { Component } from "react";
-import User_Create_Form from "../../components/create-game-component/create-form"
-import Host_Join_Lobby from "../../components/host-join-lobby-component/host-join-lobby"
-import MainContainer from "../../components/mainContainer/MainContainer"
-import Content from "../../components/content/Content"
+import User_Create_Form from "../../components/create-game-component/create-form";
+import Host_Join_Lobby from "../../components/host-join-lobby-component/host-join-lobby";
+import MainContainer from "../../components/mainContainer/MainContainer";
+import Content from "../../components/content/Content";
 import io from "socket.io-client";
 import * as constants from "../../constants";
 
@@ -27,7 +27,7 @@ export default class Host extends Component {
 
   componentDidMount() {
     const socket = io.connect(constants.HOST);
-    this.setState({socket})
+    this.setState({ socket });
     socket.emit(constants.CREATE_LOBBY);
 
     socket.on(constants.CREATE_LOBBY, ({ user }) => {
@@ -40,8 +40,8 @@ export default class Host extends Component {
 
     socket.on(constants.HOST_JOIN_LOBBY, ({ activities }) => {
       this.setState({
-        scene: constants.HOST_JOIN_LOBBY
-      })
+        scene: constants.HOST_JOIN_LOBBY,
+      });
     });
 
     socket.on(constants.PLAYER_JOINED, ({ players }) => {
@@ -50,11 +50,26 @@ export default class Host extends Component {
   }
 
   render() {
-    let lobby = (this.state.user != null) ? this.state.user.lobby : "abc123"
+    let lobby = this.state.user != null ? this.state.user.lobby : "abc123";
     return (
       <MainContainer>
-        <h1> Code: {lobby} </h1>
-        <Content scene={this.state.scene} socket={this.state.socket} data={this.state}/>
+        <h1
+          style={{
+            position: "absolute",
+            top: `15px`,
+            left: `15px`,
+            color: "white",
+            fontSize: "1.7em",
+            fontWeight: "500",
+          }}
+        >
+          Code: {lobby}
+        </h1>
+        <Content
+          scene={this.state.scene}
+          socket={this.state.socket}
+          data={this.state}
+        />
       </MainContainer>
     );
   }
