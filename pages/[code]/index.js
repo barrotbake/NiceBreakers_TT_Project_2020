@@ -36,7 +36,7 @@ class Play extends Component {
     socket.on(JOIN_LOBBY, ({ user, error }) => {
       console.log(JOIN_LOBBY, { user, error });
       if (error !== undefined) {
-        return showError(error);
+        return showError(error).then(() => this.props.router.back());
       }
       this.setState((state) => ({
         user,

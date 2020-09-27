@@ -50,6 +50,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("disconnect", () => {
+    console.log("DC");
     if (connections[socket.id].isHost) {
       for (let playerId of lobbies[connections[socket.id].lobby].players) {
         io.to(playerId).emit("disconnect");
