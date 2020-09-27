@@ -38,6 +38,12 @@ export default class Host extends Component {
       }));
     });
 
+    socket.on(constants.HOST_JOIN_LOBBY, ({ activities }) => {
+      this.setState({
+        scene: constants.HOST_JOIN_LOBBY
+      })
+    });
+
     socket.on(constants.PLAYER_JOINED, ({ players }) => {
       this.setState({ players });
     });

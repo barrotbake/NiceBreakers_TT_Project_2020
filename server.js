@@ -8,6 +8,8 @@ const {
   PLAYER_JOINED,
   SET_INFO,
   SUBMIT_FORM,
+  USER_CREATE_FORM,
+  HOST_JOIN_LOBBY
 } = require("./constants");
 
 const lobbies = {};
@@ -56,11 +58,17 @@ io.on("connection", (socket) => {
     connections[socket.id].pronunciation = pronunciation;
     lobbies[connections[socket.id].lobby].players.push(socket.id);
     io.to(socket.id).emit(SUBMIT_FORM, {
-      players: lobbies[lobbies[connections[socket.id].lobby]].players,
+      players: lobbies[connections[socket.id].lobby].players,
     });
     io.to(lobbies[connections[socket.id].lobby].host).emit(PLAYER_JOINED, {
       player: connections[socket.id],
     });
+  });
+
+  socket.on(USER_CREATE_FORM, ({activities}) => {
+    // connections[socket.id].activies = activites; // fix
+    console.log("GOT USER CREATE FORM")
+    io.to(socket.id).emit(HOST_JOIN_LOBBY, {});
   });
 
   socket.on("disconnect", () => {

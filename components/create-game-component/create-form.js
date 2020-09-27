@@ -1,9 +1,9 @@
 import React from 'react'
 import styles from './create-form.module.css'
-import Button from 'react-bootstrap/Button';
+import Button from '../button/Button';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
-
+import * as constants from "../../constants";
 
 
 
@@ -67,9 +67,9 @@ function User_Create_Form(props) {
                             <br />
 
                             <br />
-                            <Button variant="light" className={styles.button} type="submit" form="makeGame">
-                                Next
-                            </Button>
+                            <Button className={styles.button} text="Next" onClick={() => {
+                              props.socket.emit(constants.USER_CREATE_FORM, {})
+                            }} />
                         </Form>
                     </Card.Text>
                 </Card.Body>
