@@ -39,9 +39,6 @@ const Host_Join_Lobby = (props) => {
                                 Start
                 </Button2> */}
             </div>
-
-
-
         </div>
     )
 }
