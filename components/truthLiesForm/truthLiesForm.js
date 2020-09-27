@@ -3,6 +3,49 @@ import Button from "../button/Button";
 import { route } from "next/dist/next-server/server/router";
 import TruthLiesCard from "../truthLiesCard/truthLiesCard";
 import { SUBMIT_FORM } from "../../constants";
+import { useState } from "react";
+
+
+const FillingOutForm = (props) =>{
+  const [truth1, setTruth1] = useState("Say something true about you...");
+const [truth2, setTruth2] = useState("Say something true about you...");
+const [lie, setLie] = useState("Give a lie about yourself...");
+  console.log(props.submited)
+  return(
+  <div>
+  <form className={styles.form}>
+      <input
+        className={styles.textInput}
+        type="text"
+        value={props.truth1}
+        onChange={(e)=>{
+          setTruth1(e.target.value)
+        }}
+      />
+      <input
+        className={styles.textInput}
+        type="text"
+        value={props.truth2}
+        onChange={(e)=>{
+          setTruth2(e.target.value)
+        }}
+      />
+      <input
+        className={styles.textInput}
+        type="text"
+        value={props.lie}
+        onChange={(e)=>{
+          setLie(e.target.value)
+        }}
+      />
+</form>
+<div className={styles.buttonContainer}>
+  <Button text="submit" 
+  className={styles.submitButton} 
+  onClick={this.submitForm()}/>
+</div>
+</div>)
+}
 
 class TruthLiesForm extends React.Component {
   constructor(props) {
@@ -34,53 +77,34 @@ class TruthLiesForm extends React.Component {
   }
 
   doneSubmitting(){
+    console.log(this.state.submitted)
     return(
       <TruthLiesCard
       truth1={this.state.truth1}
       truth2={this.state.truth2}
       lie={this.state.lie}
+      submitted={this.state.submitted}
       />
     )
   }
-
-  fillingOutForm(){
-    return(
-      <div>
-           <form className={styles.form}>
-              <input
-                className={styles.textInput}
-                type="text"
-                value={this.state.truth1}
-                onChange={this.handleTruth1Change}
-              />
-              <input
-                className={styles.textInput}
-                type="text"
-                value={this.state.truth2}
-                onChange={this.handleTruth2Change}
-              />
-              <input
-                className={styles.textInput}
-                type="text"
-                value={this.state.lie}
-                onChange={this.handleLieChange}
-              />
-          </form>
-        <div className={styles.buttonContainer}>
-          <Button text="submit" 
-          className={styles.submitButton} 
-          onClick={this.submitForm()}/>
-        </div>
-      </div>
-    )
-  }
   
+
   render() {
-    let sub_stat = this.state.submitted
-    console.log(sub_stat)
+    console.log(this.state.submitted)
+    let current = (
+      current = <FillingOutForm
+      truth1={this.state.truth1}
+      truth2={this.state.truth2}
+      lie={this.state.lie}
+    />
+    )
+    if(this.state.submitted){
+      current = this.doneSubmitting()
+    }
+
     return (
       <div className={styles.container}>
-        {!sub_stat ?  this.doneSubmitting() : this.fillingOutForm()}
+        {current}
       </div>
     );
   }
