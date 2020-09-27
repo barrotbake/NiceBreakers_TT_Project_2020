@@ -13,6 +13,7 @@ class Play extends Component {
       user: null,
       socket: null,
       scene: constants.SET_INFO,
+      players: [],
       round: {
         finishBy: Infinity, // timestamp for when question is supposed to end
         leaders: [], // users ordered by highest score
@@ -26,7 +27,7 @@ class Play extends Component {
 
   componentDidMount() {
     const socket = io.connect(constants.HOST);
-    this.setState({socket})
+    this.setState({ socket });
     socket.emit(constants.JOIN_LOBBY, { lobby: this.props.router.query.code });
 
     socket.on(constants.JOIN_LOBBY, ({ user, error }) => {
@@ -34,14 +35,15 @@ class Play extends Component {
       if (error !== undefined) {
         return showError(error).then(() => this.props.router.back());
       }
-      this.setState({user, scene: constants.SET_INFO});
+      this.setState({ user, scene: constants.SET_INFO });
     });
-    socket.on(constants.SUBMIT_FORM, () => {
-      console.log(constants.SUBMIT_FORM, {});
-      // if (error !== undefined) {
-      //   return showError(error)
-      // }
-      this.setState({ scene: constants.WAITING});
+
+    socket.on(constants.SUBMIT_FORM, ({ players }) => {
+      this.setState({ players, scene: constants.WAITING });
+    });
+
+    socket.on(constants.PLAYER_JOINED, ({ players }) => {
+      this.setState({ players });
     });
   }
 
@@ -49,11 +51,9 @@ class Play extends Component {
     return (
       <div>
         <MainContainer>
-          <Content scene={this.state.scene} socket={this.state.socket}/>
+          <Content scene={this.state.scene} socket={this.state.socket} />
         </MainContainer>
-        <pre>
-          {/*}<code>{JSON.stringify(this.state, null, 2)}</code>{*/}
-        </pre>
+        <pre>{/*}<code>{JSON.stringify(this.state, null, 2)}</code>{*/}</pre>
       </div>
     );
   }

@@ -5,6 +5,7 @@ const {
   ANSWER_QUESTION,
   CREATE_LOBBY,
   JOIN_LOBBY,
+  PLAYER_JOINED,
   SET_INFO,
   SUBMIT_FORM,
 } = require("./constants");
@@ -27,7 +28,7 @@ io.on("connection", (socket) => {
     console.log("CREATING_LOBBY");
     connections[socket.id].isHost = true;
     connections[socket.id].lobby = createRandomAlphanum();
-    lobbies[connections[socket.id].lobby] = { host: [socket.id], players: [] };
+    lobbies[connections[socket.id].lobby] = { host: socket.id, players: [] };
     io.to(socket.id).emit(CREATE_LOBBY, { user: connections[socket.id] });
     console.log(CREATE_LOBBY, { user: connections[socket.id] });
   });
@@ -40,7 +41,6 @@ io.on("connection", (socket) => {
     }
     if (lobbies.hasOwnProperty(lobby)) {
       connections[socket.id].lobby = lobby;
-      lobbies[lobby].players.push(socket.id);
       return io
         .to(socket.id)
         .emit(JOIN_LOBBY, { user: connections[socket.id] });
@@ -54,7 +54,13 @@ io.on("connection", (socket) => {
     connections[socket.id].name = name;
     connections[socket.id].pronoun = pronoun;
     connections[socket.id].pronunciation = pronunciation;
-    io.to(socket.id).emit(SUBMIT_FORM) // pass users in lobby
+    lobbies[connections[socket.id].lobby].players.push(socket.id);
+    io.to(socket.id).emit(SUBMIT_FORM, {
+      players: lobbies[lobbies[connections[socket.id].lobby]].players,
+    });
+    io.to(lobbies[connections[socket.id].lobby].host).emit(PLAYER_JOINED, {
+      player: connections[socket.id],
+    });
   });
 
   socket.on("disconnect", () => {
