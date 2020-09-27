@@ -1,44 +1,98 @@
-const express = require("express");
-const socketIO = require("socket.io");
-const next = require("next");
-const { createServer } = require("http");
+const server = require("http").createServer();
+const io = require("socket.io")(server);
 const {
   NEXT_ROUND,
   ANSWER_QUESTION,
   CREATE_LOBBY,
   JOIN_LOBBY,
+  PLAYER_JOINED,
   SET_INFO,
+  SUBMIT_FORM,
+  USER_CREATE_FORM,
+  HOST_JOIN_LOBBY
 } = require("./constants");
 
-const port = parseInt(process.env.PORT, 10) || 3000;
-const dev = process.env.NODE_ENV !== "production";
-const app = next({ dev, quiet: false });
-const handle = app.getRequestHandler();
-const expressServer = express();
-const server = createServer(expressServer);
-const io = socketIO(server);
+const lobbies = {};
+const connections = {};
 
-const connected = {};
+io.on("connection", (socket) => {
+  connections[socket.id] = {
+    isHost: false,
+    lobby: null,
+    points: 0,
+    name: "",
+    pronoun: "",
+    pronunciation: "",
+  };
+  console.log("CONNECTION");
 
-app.prepare().then(() => {
-  io.on("connection", (socket) => {
-    connected[socket.id] = {};
+  socket.on(CREATE_LOBBY, () => {
+    console.log("CREATING_LOBBY");
+    connections[socket.id].isHost = true;
+    connections[socket.id].lobby = createRandomAlphanum();
+    lobbies[connections[socket.id].lobby] = { host: socket.id, players: [] };
+    io.to(socket.id).emit(CREATE_LOBBY, { user: connections[socket.id] });
+    console.log(CREATE_LOBBY, { user: connections[socket.id] });
+  });
 
-    socket.on(ANSWER_QUESTION, (details) => {});
-
-    socket.on("disconnect", () => {
-      delete connected[socket.id];
+  socket.on(JOIN_LOBBY, ({ lobby }) => {
+    if (connections[socket.id].lobby !== null) {
+      return io
+        .to(socket.id)
+        .emit(JOIN_LOBBY, { error: "You are already in a lobby." });
+    }
+    if (lobbies.hasOwnProperty(lobby)) {
+      connections[socket.id].lobby = lobby;
+      return io
+        .to(socket.id)
+        .emit(JOIN_LOBBY, { user: connections[socket.id] });
+    }
+    io.to(socket.id).emit(JOIN_LOBBY, {
+      error: `Your lobby code, ${lobby}, does not exist.`,
     });
   });
 
-  expressServer.all("*", (req, res) => {
-    return handle(req, res);
+  socket.on(SUBMIT_FORM, ({ name, pronoun, pronunciation }) => {
+    connections[socket.id].name = name;
+    connections[socket.id].pronoun = pronoun;
+    connections[socket.id].pronunciation = pronunciation;
+    lobbies[connections[socket.id].lobby].players.push(socket.id);
+    io.to(socket.id).emit(SUBMIT_FORM, {
+      players: lobbies[connections[socket.id].lobby].players,
+    });
+    io.to(lobbies[connections[socket.id].lobby].host).emit(PLAYER_JOINED, {
+      player: connections[socket.id],
+    });
   });
 
-  expressServer.listen(port, (err) => {
-    if (err) {
-      throw err;
+  socket.on(USER_CREATE_FORM, ({activities}) => {
+    // connections[socket.id].activies = activites; // fix
+    console.log("GOT USER CREATE FORM")
+    io.to(socket.id).emit(HOST_JOIN_LOBBY, {});
+  });
+
+  socket.on("disconnect", () => {
+    console.log("DC");
+    if (connections[socket.id].isHost) {
+      for (let playerId of lobbies[connections[socket.id].lobby].players) {
+        io.to(playerId).emit("disconnect");
+        delete connections[playerId];
+      }
+      delete lobbies[connections[socket.id].lobby];
     }
-    console.log(`> Ready on http://localhost:${port}`);
+    delete connections[socket.id];
   });
 });
+
+server.listen(4242, () => {
+  console.log("sockets listening");
+});
+
+// Helpers
+const createRandomAlphanum = (length = 6) => {
+  const possible = "BCDFGHJKLMNPQRSTUVWXYZ01234567890123456789";
+  return new Array(length)
+    .fill("")
+    .map(() => possible[Math.floor(Math.random() * possible.length)])
+    .join("");
+};

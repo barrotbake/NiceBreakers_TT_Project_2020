@@ -1,11 +1,21 @@
-import io from "socket.io-client";
 import { useEffect, useState } from "react";
-import { NEXT_ROUND, HOST } from "../constants.js";
+import io from "socket.io-client";
+import { NEXT_ROUND, HOST, SET_INFO } from "../constants.js";
 
-let socket = io(HOST);
+const createRandomAlphanum = (length = 6) => {
+  const possible = "BCDFGHJKLMNPQRSTUVWXYZ01234567890123456789";
+  return new Array(length)
+    .fill("")
+    .map(() => possible[Math.floor(Math.random() * possible.length)])
+    .join("");
+};
 
-export const useRound = () => {
+export const useRound = (code = createRandomAlphanum(6)) => {
+  ws.on("open", () => {
+    console.log("OPEN");
+  });
   const [round, setRound] = useState({
+    code,
     finishBy: Infinity, // timestamp for when question is supposed to end
     leaders: [], // users ordered by highest score
     roundType: null, // Two Truths and a Lie, Fun Fact
@@ -14,17 +24,19 @@ export const useRound = () => {
     totalRounds: 0,
   });
   useEffect(() => {
-    socket.on(NEXT_ROUND, (serializedRoundDetails) => {
-      const roundDetails = JSON.parse(serializedRoundDetails);
-      console.log({ serializedRoundDetails, roundDetails });
-      setRound({
-        finishBy: roundDetails.finishBy,
-        leaders: roundDetails.leaders,
-        roundType: roundDetails.roundType,
-        pointsEarned: roundDetails.pointsEarned,
-        roundNumber: roundDetails.roundNumber,
-        totalRounds: roundDetails.totalRounds,
-      });
+    ws.on("message", (details) => {
+      console.log("MESSAGE", { details });
+      // const roundDetails = JSON.parse(serializedRoundDetails);
+      // console.log({ serializedRoundDetails, roundDetails });
+      // setRound({
+      //   code: roundDetails.code,
+      //   finishBy: roundDetails.finishBy,
+      //   leaders: roundDetails.leaders,
+      //   roundType: roundDetails.roundType,
+      //   pointsEarned: roundDetails.pointsEarned,
+      //   roundNumber: roundDetails.roundNumber,
+      //   totalRounds: roundDetails.totalRounds,
+      // });
     });
   }, []);
   return round;
