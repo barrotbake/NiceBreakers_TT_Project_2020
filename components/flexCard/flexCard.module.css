@@ -1,0 +1,9 @@
+.flexCard {
+    display: flex;
+    min-width: 100px;
+    min-height: 100px;
+    background: #FFFFFF;
+    border: 5px solid #000000;
+    box-sizing: border-box;
+    border-radius: 50px;
+}

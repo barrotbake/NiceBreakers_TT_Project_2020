@@ -4,20 +4,10 @@
     align-items: flex-start;
     padding: 22px 0px 0px 27px;
 
-    position: absolute;
-    width: 549px;
-    height: 498px;
-    left: 445px;
-    top: 231px;
-
     background: #FFFFFF;
     border: 5px solid #000000;
     box-sizing: border-box;
     border-radius: 50px;
-
-    font-family: SF Pro;
-    font-style: normal;
-    font-weight: normal;
 }
 
 
@@ -60,7 +50,7 @@
     left: 128px;
     top: 383px;
     bottom: 12.38%;
-    
+
     font-family: SF Pro;
     font-style: normal;
     font-weight: normal;

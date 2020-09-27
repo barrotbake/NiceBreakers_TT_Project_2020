@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import styles from "../styles/Home.module.css";
 import User_Join_Form from "../components/user-form-component/user-join-form.js";
 import User_Create_Form from "../components/create-game-component/create-form.js";
-import Navbar from "../components/navbar/Navbar";
+import Nav from "../components/nav/Nav";
 import Button from "../components/button/Button";
 import MainContainer from "../components/mainContainer/MainContainer";
 import SweetAlert from "sweetalert2";
