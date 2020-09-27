@@ -5,6 +5,8 @@ import Button2 from 'react-bootstrap/Button';
 
 
 const Host_Join_Lobby = (props) => {
+
+    // TO DO: Connect props for # of users, and the room code
     return (
         <div className={styles.gen_box}>
 
