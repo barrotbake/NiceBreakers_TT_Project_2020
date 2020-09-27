@@ -4,20 +4,15 @@ import SweetAlert from "sweetalert2";
 import Content from "../../components/content/Content";
 import { Component } from "react";
 import io from "socket.io-client";
-import {
-  NEXT_ROUND,
-  ANSWER_QUESTION,
-  CREATE_LOBBY,
-  JOIN_LOBBY,
-  SET_INFO,
-  HOST,
-} from "../../constants";
+import * as constants from "../../constants";
 
 class Play extends Component {
   constructor() {
     super();
     this.state = {
       user: null,
+      socket: null,
+      scene: constants.SET_INFO,
       round: {
         finishBy: Infinity, // timestamp for when question is supposed to end
         leaders: [], // users ordered by highest score
@@ -30,18 +25,23 @@ class Play extends Component {
   }
 
   componentDidMount() {
-    const socket = io.connect(HOST);
-    socket.emit(JOIN_LOBBY, { lobby: this.props.router.query.code });
+    const socket = io.connect(constants.HOST);
+    this.setState({socket})
+    socket.emit(constants.JOIN_LOBBY, { lobby: this.props.router.query.code });
 
-    socket.on(JOIN_LOBBY, ({ user, error }) => {
-      console.log(JOIN_LOBBY, { user, error });
+    socket.on(constants.JOIN_LOBBY, ({ user, error }) => {
+      console.log(constants.JOIN_LOBBY, { user, error });
       if (error !== undefined) {
         return showError(error).then(() => this.props.router.back());
       }
-      this.setState((state) => ({
-        user,
-        round: state.round,
-      }));
+      this.setState({user, scene: constants.SET_INFO});
+    });
+    socket.on(constants.SUBMIT_FORM, () => {
+      console.log(constants.SUBMIT_FORM, {});
+      // if (error !== undefined) {
+      //   return showError(error)
+      // }
+      this.setState({ scene: constants.WAITING});
     });
   }
 
@@ -49,10 +49,10 @@ class Play extends Component {
     return (
       <div>
         <MainContainer>
-          <Content scene="Two Truths and a Lie" />
+          <Content scene={this.state.scene} socket={this.state.socket}/>
         </MainContainer>
         <pre>
-          <code>{JSON.stringify(this.state, null, 2)}</code>
+          {/*}<code>{JSON.stringify(this.state, null, 2)}</code>{*/}
         </pre>
       </div>
     );

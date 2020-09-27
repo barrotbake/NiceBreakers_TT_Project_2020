@@ -3,9 +3,10 @@ import styles from './user-form.module.css'
 import Button from "../button/Button.js";
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
+import * as constants from "../../constants";
 
 
-function User_Join_Form() {
+function User_Join_Form(props) {
     return (
         <>
             <Card className={styles.form}>
@@ -14,7 +15,7 @@ function User_Join_Form() {
                 <Card.Body>
                     <Card.Text className={styles.form_text}>
                         <Form>
-        
+
                             <Form.Group controlId="formBasicName">
                                 <Form.Label>Name</Form.Label>
                                 <br />
@@ -35,9 +36,12 @@ function User_Join_Form() {
                                 <Form.Control className={styles.form_input} type="pronounciation" />
                             </Form.Group>
                             <br />
-                            
-                            
-                            <Button text="Join" className={styles.button} />
+
+
+                            <Button text="Join" className={styles.button} onClick={() => {
+                              console.log("user-form", props.socket)
+                              props.socket.emit(constants.SUBMIT_FORM, {name: "Bob", pronoun: "he/him", pronunciation: "Boob"})
+                            }} />
 
                         </Form>
                     </Card.Text>

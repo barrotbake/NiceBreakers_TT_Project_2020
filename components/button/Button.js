@@ -3,9 +3,7 @@ import styles from "./button.module.css";
 const Button = (props) => {
   return (
     <div onClick={props.onClick} className={styles.parent}>
-      <a role="button" className={styles.child}>
-        {props.text}
-      </a>
+      <a className={styles.child}> {props.text} </a>
     </div>
   );
 };

@@ -6,6 +6,7 @@ const {
   CREATE_LOBBY,
   JOIN_LOBBY,
   SET_INFO,
+  SUBMIT_FORM,
 } = require("./constants");
 
 const lobbies = {};
@@ -47,6 +48,13 @@ io.on("connection", (socket) => {
     io.to(socket.id).emit(JOIN_LOBBY, {
       error: `Your lobby code, ${lobby}, does not exist.`,
     });
+  });
+
+  socket.on(SUBMIT_FORM, ({ name, pronoun, pronunciation }) => {
+    connections[socket.id].name = name;
+    connections[socket.id].pronoun = pronoun;
+    connections[socket.id].pronunciation = pronunciation;
+    io.to(socket.id).emit(SUBMIT_FORM) // pass users in lobby
   });
 
   socket.on("disconnect", () => {
