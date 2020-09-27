@@ -41,6 +41,10 @@ class Play extends Component {
     socket.on(constants.SUBMIT_FORM, ({ players }) => {
       this.setState({ players, scene: constants.WAITING });
     });
+
+    socket.on(constants.START_GAME, ({ game }) => {
+      this.setState({ scene: game });
+    });
   }
 
   render() {
@@ -57,9 +61,15 @@ class Play extends Component {
           }}
         >
           Code: {this.state.user ? this.state.user.lobby : ""}
+          <br />
+          Players: {this.state.players ? this.state.players.length : 0}
         </h1>
         <MainContainer>
-          <Content scene={this.state.scene} socket={this.state.socket} />
+          <Content
+            scene={this.state.scene}
+            socket={this.state.socket}
+            data={this.state}
+          />
         </MainContainer>
         <pre>{/*}<code>{JSON.stringify(this.state, null, 2)}</code>{*/}</pre>
       </div>

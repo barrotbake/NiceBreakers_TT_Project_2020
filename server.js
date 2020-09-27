@@ -10,6 +10,8 @@ const {
   SUBMIT_FORM,
   USER_CREATE_FORM,
   HOST_JOIN_LOBBY,
+  TWO_TRUTHS_AND_A_LIE,
+  START_GAME,
 } = require("./constants");
 
 const lobbies = {};
@@ -73,6 +75,22 @@ io.on("connection", (socket) => {
     // host continues after determining activities
     lobbies[connections[socket.id].lobby].activities = activities;
     io.to(socket.id).emit(HOST_JOIN_LOBBY, { activities });
+  });
+
+  socket.on(START_GAME, ({ game }) => {
+    if (!connections[socket.id].isHost) {
+      return io
+        .to(socket.id)
+        .emit(START_GAME, { error: "You must be the host to start a game." });
+    }
+    if (![TWO_TRUTHS_AND_A_LIE].includes(game)) {
+      return io
+        .to(socket.id)
+        .emit(START_GAME, { error: "No valid game has been chosen." });
+    }
+    for (let playerId of lobbies[connections[socket.id].lobby].players) {
+      io.to(playerId).emit(START_GAME, { game });
+    }
   });
 
   socket.on("disconnect", () => {

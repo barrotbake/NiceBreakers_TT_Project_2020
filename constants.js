@@ -6,6 +6,7 @@ module.exports = {
   JOIN_LOBBY: "join-lobby", // -> Server
   SUBMIT_FORM: "submit-form",
   PLAYER_JOINED: "player-joined",
+  START_GAME: "start-game",
 
   // Player Scene Constants
   SET_INFO: "set-info", // -> Server; Sets the name, prefered pronoun, and name pronunciation of a user
@@ -15,6 +16,8 @@ module.exports = {
   //Host Scene Constants
   USER_CREATE_FORM: "user-create-form",
   HOST_JOIN_LOBBY: "host-join-lobby", // start game
+
+  END_SCREEN: "end-screen",
 
   // Miscellaneous Constants
   HOST: "localhost:4242",

@@ -30,95 +30,25 @@ function User_Create_Form(props) {
         <Card.Body>
           <Card.Text className={styles.form_text}>
             <Form>
-              <Form.Group controlId="formBasicQuestions">
-                <Form.Label className={styles.form_text}>
-                  {" "}
-                  Pick Your Questions/Mini-Games
-                </Form.Label>
-                <br />
-                <Form.Group controlId="exampleForm.SelectCustomHtmlSize">
-                  <br />
-                  <Form.Label className={styles.label}>
-                    Select with five questions
-                  </Form.Label>
-                  <br />
-                  <br />
-
-                  <Form.Control
-                    as="select"
-                    custom
-                    multiple
-                    onChange={(event) => {
-                      console.log(event.target.value);
-                    }}
-                  >
-                    <br />
-                    <option value={"What is your favorite food?"}>
-                      What is your favorite food?{" "}
-                    </option>
-                    <option value={"What's your favorite genre of music?"}>
-                      What's your favorite genre of music?
-                    </option>
-                    <option value={"Do you have any hobbies?"}>
-                      Do you have any hobbies?
-                    </option>
-                    <option value={"What was your dream career as a child?"}>
-                      What was your dream career as a child?
-                    </option>
-                    <option
-                      value={"What is the best gift you've ever been given?"}
-                    >
-                      What is the best gift you've ever been given?
-                    </option>
-                    <option value={"What's your favorite season of the year?"}>
-                      What's your favorite season of the year?
-                    </option>
-                    <option value={"Do you like hot or cold weather?"}>
-                      Do you like hot or cold weather?
-                    </option>
-                    <option
-                      value={"Are you a morning person or a night person?"}
-                    >
-                      Are you a morning person or a night person?
-                    </option>
-                    <option value={"What was your first job?"}>
-                      What was your first job?
-                    </option>
-                    <option value={"Where have you traveled?"}>
-                      Where have you traveled?
-                    </option>
-                    <option
-                      value={"What's your go to drink for a caffeine jump?"}
-                    >
-                      What's your go to drink for a caffeine jump?
-                    </option>
-                    {/* <option value={"Never Have I Ever"}>
-                      Never Have I Ever
-                    </option> */}
-                    <option value={"Two Truths and A Lie"}>
-                      Two Truths and A Lie
-                    </option>
-                  </Form.Control>
-                </Form.Group>
-                <Form.Text className={styles.text}>
-                  Hold down the Ctrl (windows) or Command (Mac) button to select
-                  multiple options.
-                </Form.Text>
-                <Form.Text className={styles.text}>
-                  {" "}
-                  Code: {props.code}
-                </Form.Text>
-              </Form.Group>
-              <br />
-
-              <br />
+              <Form.Label>Don't be shy, choose a game!</Form.Label>
               <Button
                 className={styles.button}
-                text="Next"
+                text={constants.TWO_TRUTHS_AND_A_LIE}
                 onClick={() => {
-                  props.socket.emit(constants.USER_CREATE_FORM, {});
+                  props.socket.emit(constants.START_GAME, {
+                    game: constants.TWO_TRUTHS_AND_A_LIE,
+                  });
                 }}
               />
+              {/* <Button
+                className={styles.button}
+                text={constants.TWO_TRUTHS_AND_A_LIE}
+                onClick={() => {
+                  props.socket.emit(constants.START_GAME, {
+                    game: constants.TWO_TRUTHS_AND_A_LIE,
+                  });
+                }}
+              /> */}
             </Form>
           </Card.Text>
         </Card.Body>
