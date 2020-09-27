@@ -1,6 +1,6 @@
 import io from "socket.io-client";
 import { useEffect, useState } from "react";
-import { NEXT_ROUND, HOST } from "../constants.mjs";
+import { NEXT_ROUND, HOST } from "../constants.js";
 
 let socket = io(HOST);
 
