@@ -14,7 +14,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #6CA1D2;
   width: 100%;
 }
 
@@ -38,20 +37,18 @@
 }
 
 .title a {
-  color: #0070f3;
+  color: #ffffff;
   text-decoration: none;
-}
-
-.title a:hover,
-.title a:focus,
-.title a:active {
-  text-decoration: underline;
+  font-weight: 700;
+  -webkit-text-stroke-width: 3px;
+  -webkit-text-stroke-color: black;
 }
 
 .title {
   margin: 0;
   line-height: 1.15;
-  font-size: 4rem;
+  font-size: 6rem;
+  z-index: 10;
 }
 
 .title,

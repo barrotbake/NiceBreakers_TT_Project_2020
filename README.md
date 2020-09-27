@@ -8,7 +8,7 @@ A visitor can join a lobby (created by a moderator) in which everyone plays low-
 
 ## Technology ⚡
 
-This Next.js application is powered by WebRTC to allow people to create and join lobbies.
+This Next.js application is powered by WebSockets to allow people to create and join lobbies.
 
 ---
 
