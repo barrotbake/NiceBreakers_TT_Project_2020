@@ -41,15 +41,23 @@ class Play extends Component {
     socket.on(constants.SUBMIT_FORM, ({ players }) => {
       this.setState({ players, scene: constants.WAITING });
     });
-
-    socket.on(constants.PLAYER_JOINED, ({ players }) => {
-      this.setState({ players });
-    });
   }
 
   render() {
     return (
       <div>
+        <h1
+          style={{
+            position: "absolute",
+            top: `15px`,
+            left: `15px`,
+            color: "white",
+            fontSize: "1.7em",
+            fontWeight: "500",
+          }}
+        >
+          Code: {this.state.user ? this.state.user.lobby : ""}
+        </h1>
         <MainContainer>
           <Content scene={this.state.scene} socket={this.state.socket} />
         </MainContainer>
