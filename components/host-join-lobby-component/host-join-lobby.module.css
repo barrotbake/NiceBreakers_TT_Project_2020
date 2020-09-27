@@ -75,20 +75,3 @@
     top: 120px;
     font-size: 60px;
 }
-
-.button{
-    background: #FFFFFF;
-    box-shadow: 0px 15px 0px #BABABA;
-    border-radius: 100px;
-
-    width: 12139px !important;
-    max-width: 12139px !important;
-    height: 710px  !important;
-    max-height: 710px  !important;
-    position: static;
-    left: 662px;
-    top: 669px;
-
-    display: flex;
-
-}

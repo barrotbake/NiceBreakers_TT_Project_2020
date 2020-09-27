@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./user-form.module.css";
-import Button from "../button/Button.js";
+import Button from "../formButton/Button.js";
 import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import * as constants from "../../constants";
@@ -59,7 +59,6 @@ function User_Join_Form(props) {
 
               <Button
                 text="Join"
-                className={styles.button}
                 onClick={async () => {
                   console.log("user-form", props.socket);
                   for (const [fieldName, value] of Object.entries({

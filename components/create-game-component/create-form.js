@@ -31,15 +31,13 @@ function User_Create_Form(props) {
           <Card.Text className={styles.form_text}>
             <Form>
               <Form.Label>Don't be shy, choose a game!</Form.Label>
-              <Button
-                className={styles.button}
-                text={constants.TWO_TRUTHS_AND_A_LIE}
-                onClick={() => {
-                  props.socket.emit(constants.START_GAME, {
-                    game: constants.TWO_TRUTHS_AND_A_LIE,
-                  });
-                }}
-              />
+              <div onClick={() => {
+                props.socket.emit(constants.START_GAME, {
+                  game: constants.TWO_TRUTHS_AND_A_LIE,
+                });
+              }} className={styles.parent}>
+                <a className={styles.child}> {constants.TWO_TRUTHS_AND_A_LIE} </a>
+              </div>
               {/* <Button
                 className={styles.button}
                 text={constants.TWO_TRUTHS_AND_A_LIE}
