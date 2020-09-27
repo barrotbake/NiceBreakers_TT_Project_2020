@@ -65,11 +65,7 @@ class MainContainer extends React.Component {
   // }
 
   render() {
-    return (
-      <div className={styles.main}>
-        {this.props.children}
-      </div>
-    );
+    return <div className={styles.main}>{this.props.children}</div>;
   }
 }
 
