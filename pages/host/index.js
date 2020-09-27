@@ -16,6 +16,7 @@ export default class Host extends Component {
     super();
     this.state = {
       user: null,
+      players: [],
       round: {
         finishBy: Infinity, // timestamp for when question is supposed to end
         leaders: [], // users ordered by highest score
@@ -37,6 +38,10 @@ export default class Host extends Component {
         user,
         round: state.round,
       }));
+    });
+
+    socket.on(constants.PLAYER_JOINED, ({ players }) => {
+      this.setState({ players });
     });
   }
 
