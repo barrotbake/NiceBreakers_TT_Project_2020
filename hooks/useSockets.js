@@ -1,28 +1,30 @@
 import io from "socket.io-client";
 import { useEffect, useState } from "react";
-import { NEXT_ROUND, HOST } from "../constants";
+import { NEXT_ROUND, HOST } from "../constants.mjs";
 
 let socket = io(HOST);
 
 export const useRound = () => {
-  // socket = io(HOST);
-  const [round, setRound] = useState(null);
+  const [round, setRound] = useState({
+    finishBy: Infinity, // timestamp for when question is supposed to end
+    leaders: [], // users ordered by highest score
+    roundType: null, // Two Truths and a Lie, Fun Fact
+    pointsEarned: 0, // How many points earned from the last round
+    roundNumber: 0,
+    totalRounds: 0,
+  });
   useEffect(() => {
     socket.on(NEXT_ROUND, (serializedRoundDetails) => {
       const roundDetails = JSON.parse(serializedRoundDetails);
       console.log({ serializedRoundDetails, roundDetails });
-      setRound(roundDetails);
-      /*
-      details = {
-        timeLimit: 0 // timestamp for when question is supposed to end
-        meta: {} // extra details that may be necessary for a round
-        leaders: [] // users ordered by highest score
-        roundType: "" // Two Truths and a Lie, Fun Fact
-        pointsEarned: 0 // How many points earned from the last round
-        roundNumber: 0 // 1-based index
-        totalRounds: 0 // How many rounds are there
-      }
-      */
+      setRound({
+        finishBy: roundDetails.finishBy,
+        leaders: roundDetails.leaders,
+        roundType: roundDetails.roundType,
+        pointsEarned: roundDetails.pointsEarned,
+        roundNumber: roundDetails.roundNumber,
+        totalRounds: roundDetails.totalRounds,
+      });
     });
   }, []);
   return round;
