@@ -1,5 +1,6 @@
 import styles from "./truthLiesCard.module.css";
 
+
 class TruthLiesCard extends React.Component {
   constructor(props) {
     super(props);
@@ -9,17 +10,14 @@ class TruthLiesCard extends React.Component {
       card1: {
         text: "",
         type: "truth",
-        color: { "background-color": "green" },
       },
       card2: {
         text: "",
         type: "truth",
-        color: styles.choices,
       },
       card3: {
         text: "",
         type: "truth",
-        color: styles.choices,
       },
     };
     this.handleClickCard1 = this.handleClickCard1.bind(this);

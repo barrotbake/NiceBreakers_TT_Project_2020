@@ -6,12 +6,13 @@ import User_Create_Form from '../components/create-game-component/create-form.js
 
 import TruthLiesCard from '../components/truthLiesCard/truthLiesCard'
 import FlexCard from '../components/flexCard/flexCard'
+import TruthsAndLiesMain from '../components/truthsAndLiesMain/truthsAndLiesMain';
 
 export default function Test() {
 
   return (
     <div>
-      <FlexCard>Hekko</FlexCard>
+      <TruthsAndLiesMain/>
     </div>
   );
 }
