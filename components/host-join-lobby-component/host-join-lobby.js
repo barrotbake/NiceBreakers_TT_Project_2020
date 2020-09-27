@@ -15,26 +15,26 @@ const Host_Join_Lobby = (props) => {
                 <h2 className={styles.top_text}>{props.data.players.length}</h2>
                 {/* props.children */}
             </div>
-            <br/>
+            <br />
 
 
             <div className={styles.right_box}>
                 <h1 className={styles.right_top_text}>Room Code</h1>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
                 <p className={styles.right_sub_text}>{props.data.user.lobby}</p>
                 {/* {props.children} */}
 
-                <br/>
-                <br/>
-                <Button text="Start" className={styles.button}/>
+                <br />
+                <br />
+                <Button text="Start" className={styles.button} />
                 {/* <Button2 variant="light" className={styles.button} type="submit" form="makeGame">
                                 Start
                 </Button2> */}
