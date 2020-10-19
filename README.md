@@ -13,7 +13,7 @@ Ice-breakers tend to nudge people out of their comfort zones. The right balance 
 This Next.js application is powered by WebSockets to allow people to create and join lobbies.
 
 ---
-
+Visit the live site [here](http://nicebreakers.tech)! <Br>
 Hacked with 💖 by [Jacob][jacob], [Aaron][aaron], [Sam][sam], and [Ethan][ethan] for [ShellHacks][shellhacks]
 
 [jacob]: https://github.com/barrotbake
